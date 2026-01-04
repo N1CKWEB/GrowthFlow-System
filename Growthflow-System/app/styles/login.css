@@ -2,69 +2,70 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-/******** Layout base ********/
+/* ===== LAYOUT ===== */
 .login-container {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  min-height: 100vh;
 }
 
-/******** Left side ********/
+/* ===== LEFT ===== */
 .login-left {
-  flex: 1;
-  min-width: 380px;
-  max-width: 700px;
-  background: linear-gradient(180deg,#0b1120,#0548d9);
+  background: linear-gradient(180deg, #0b1120, #0e2d6f);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(40px, 6vw, 100px);
+  padding: clamp(32px, 6vw, 96px);
   color: #fff;
-}
-
-.login-logo {
-  display: flex;
-  margin: 0 auto;
-  position: relative;
-  right:60px;
-  bottom: 170px;
-  height: 500px;
 }
 
 .login-form-wrapper {
   width: 100%;
-  max-width: clamp(300px, 28vw, 420px);
+  max-width: 420px;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .login-subtitle {
   font-size: clamp(14px, 1.2vw, 18px);
-  opacity: 0.75;
-  margin-bottom: clamp(18px, 2.5vh, 30px);
-  margin-bottom: 10px;
-  position: relative;
-  bottom: 290px;
-  left: 42px;
-  font-weight: bold;
-  
-}
-
-.signup-text {
-  margin-top: clamp(14px, 2vh, 24px);
-  font-size: clamp(13px, 1vw, 16px);
   opacity: 0.8;
-}
-.signup-text a {
-  color: #4da6ff;
-  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  bottom: 0;
+  left: 0;
 }
 
-/******** Right side ********/
+/* FORM */
+.login-field-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  bottom: 0;
+}
+
+.button-submit-login {
+  width: 60%;
+  height: 48px;
+  background-color: #0e2d6f;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.button-submit-login:hover {
+  background: #1d4ed8;
+}
+
+/* ===== RIGHT ===== */
 .login-right {
-  flex: 1.4;
-  background-image: url('https://images.unsplash.com/photo-1728582195927-c789cd39abad?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url("https://images.unsplash.com/photo-1728582195927-c789cd39abad");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -72,44 +73,41 @@
 
 .hero-overlay {
   position: absolute;
-  bottom: clamp(50px, 7vh, 120px);
-  left: clamp(40px, 4vw, 100px);
-  right: clamp(40px, 4vw, 100px);
+  bottom: 80px;
+  left: 80px;
+  right: 80px;
   color: white;
 }
 
 .hero-title {
-  font-size: clamp(28px, 3vw, 48px);
+  font-size: 2.5rem;
   font-weight: 800;
-  margin-bottom: 14px;
-  max-width: 550px;
+  margin-bottom: 1rem;
+  max-width: 920px;
 }
 
 .hero-subtitle {
-  font-size: clamp(14px, 1.2vw, 18px);
+  font-size: 1rem;
   max-width: 420px;
   opacity: 0.9;
 }
 
-/******** Responsive ********/
-@media (max-width: 1200px) {
-  .login-right {
-    flex: 1.1;
-  }
-}
-
+/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .login-container {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
+
   .login-right {
     display: none;
   }
+
   .login-left {
-    width: 100%;
-    height: 100vh;
     align-items: center;
     text-align: center;
-    max-width: none;
+  }
+
+  .login-form-wrapper {
+    max-width: 100%;
   }
 }
