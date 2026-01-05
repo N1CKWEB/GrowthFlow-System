@@ -5,22 +5,22 @@ import { StatCard } from "~/components/StartCard";
 function Home() {
   const logo = "/assets/img/logo_blanco.png";
   return (
-    <main className="p-6 space-y-8 ">
+    <main className="min-h-screen p-6 space-y-8 bg-blue-900/25">
       {/* Header */}
-      <header>
+      <header className="relative ">
         <img
           src={logo}
-          className={
-            "h-18 w-16 object-none object-center bg-top-left relative bottom-10"
-          }
+          className={"h-30 w-70 object-none object-center bg-top-left relative"}
           alt="GrowthFlow"
         />
-        <h1 className="text-2xl font-semibold text-white">Dashboard</h1>
+        <h1 className="text-2xl font-semibold text-white relative top-20">
+          Dashboard
+        </h1>
         <p className="text-sm text-slate-400">Resumen general de tu negocio</p>
       </header>
 
       {/* Stats */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 ">
+      <section className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-2 relative top-20">
         <StatCard title="Leads" value="1,320" trend="+3.5%" />
         <StatCard title="Conversiones" value="320" trend="-2%" />
         <StatCard title="Ingresos" value="$324,200" trend="+32%" />
@@ -28,9 +28,9 @@ function Home() {
       </section>
 
       {/* Main content */}
-      <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 xl:grid-cols-3 gap-6 relative top-30">
         {/* Chart */}
-        <div className="xl:col-span-2 rounded-2xl bg-linear-to-br from-slate-800 to-slate-900 p-6 shadow-[0_10px_30px_rgba(0,0,0,0.35)] border border-white/5">
+        <div className="xl:col-span-2 rounded-2xl bg-linear-to-br from-slate-800 to-slate-900 p-6 shadow-[0_10px_30px_rgba(0,0,0,0.35)] border border-white/5 justify-center ">
           <SectionTitle title="Evolución de leads" />
           <div className="h-64 flex items-center justify-center text-slate-500">
             {/* Acá después va Recharts */}
@@ -39,7 +39,7 @@ function Home() {
         </div>
 
         {/* Activity */}
-        <div className="rounded-2xl bg-linear-to-br from-slate-800 to-slate-900 p-6 shadow-[0_10px_30px_rgba(0,0,0,0.35)] border border-white/5 ">
+        <div className="rounded-2xl bg-linear-to-br from-slate-800  p-6 shadow-[0_10px_30px_rgba(0,0,0,0.35)] border border-white/5 ">
           <SectionTitle title="Actividad reciente" />
           <div className="space-y-4 mt-4">
             <ActivityItem text="Nuevo lead desde Instagram" />
