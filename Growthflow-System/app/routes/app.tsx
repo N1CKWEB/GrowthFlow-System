@@ -1,19 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../pages/home/home";
-import Login from "../pages/login/login";
-import Leads from "../pages/leads/leads";
-import Settings from "../pages/settings/settings";
+import { Settings } from "lucide-react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "~/layout";
+import AIAssistant from "~/pages/aiassistant/page";
+import Automations from "~/pages/automations/automations";
+import Dashboard from "~/pages/home/home";
+import Leads from "~/pages/leads/leads";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/leads" element={<Leads />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/leads" element={<Leads />} />
+          <Route path="/automations" element={<Automations />} />
+          <Route path="/ai-assistant" element={<AIAssistant />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
