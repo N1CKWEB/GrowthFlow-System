@@ -16,7 +16,7 @@ export default function Layout() {
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed(!collapsed)}
       />
-      ;
+
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header */}
         <header className="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-xl border-b border-white/5">

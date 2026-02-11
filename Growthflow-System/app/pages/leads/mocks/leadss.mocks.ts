@@ -1,5 +1,5 @@
 import type { Lead } from "../interfaces/leads.interfaces";
-const mockLeads: Lead[] = [
+export const mockLeads: Lead[] = [
   {
     id: "1",
     name: "María González",

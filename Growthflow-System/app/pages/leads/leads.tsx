@@ -1,9 +1,67 @@
-import { Filter, Mail, Phone, Search } from "lucide-react";
+import {
+  CheckCircle2,
+  Clock,
+  Filter,
+  Globe,
+  Instagram,
+  Mail,
+  MessageSquare,
+  MoreVertical,
+  Phone,
+  Search,
+  XCircle,
+} from "lucide-react";
 import LeadStats from "./components/LeadStats";
 import { useState } from "react";
+import { mockLeads, sourceColors } from "./mocks/leadss.mocks";
 
 function Lead() {
+  const sourceIcons = {
+    instagram: <Instagram className="w-4 h-4" />,
+    web: <Globe className="w-4 h-4" />,
+    referral: <MessageSquare className="w-4 h-4" />,
+  };
+
   const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState<string>("all");
+
+  const statusConfig = {
+    new: {
+      label: "Nuevo",
+      color: "bg-blue-500/10 text-blue-400",
+      icon: <Clock className="w-3 h-3" />,
+    },
+    contacted: {
+      label: "Contactado",
+      color: "bg-yellow-500/10 text-yellow-400",
+      icon: <Mail className="w-3 h-3" />,
+    },
+    qualified: {
+      label: "Calificado",
+      color: "bg-purple-500/10 text-purple-400",
+      icon: <CheckCircle2 className="w-3 h-3" />,
+    },
+    converted: {
+      label: "Convertido",
+      color: "bg-emerald-500/10 text-emerald-400",
+      icon: <CheckCircle2 className="w-3 h-3" />,
+    },
+    lost: {
+      label: "Perdido",
+      color: "bg-red-500/10 text-red-400",
+      icon: <XCircle className="w-3 h-3" />,
+    },
+  };
+
+  const filteredLeads = mockLeads.filter((lead) => {
+    const matchesSearch =
+      lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lead.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter =
+      filterStatus === "all" || lead.status === filterStatus;
+    return matchesSearch && matchesFilter;
+  });
+
   return (
     <main className="">
       <div className="min-h-screen">
@@ -17,7 +75,8 @@ function Lead() {
         <div className="mb-20">
           <LeadStats />
         </div>
-        <div className="flex flex-col md:flex-row gap-4">
+
+        <div className="flex flex-col md:flex-row gap-4 mb-10">
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
             <input
@@ -33,77 +92,105 @@ function Lead() {
             <span>Filtros</span>
           </button>
         </div>
-              {/* Leads Table/Cards */}
-      <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden">
-        {/* Desktop Table */}
-        <div className="hidden md:block overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-white/5">
-                <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">Nombre</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">Contacto</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">Origen</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">Estado</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">Valor</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">Fecha</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-slate-400"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredLeads.map((lead) => (
-                <tr key={lead.id} className="border-b border-white/5 hover:bg-slate-800/50 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium">
-                        {lead.name.charAt(0)}
-                      </div>
-                      <span className="text-white font-medium">{lead.name}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2 text-sm text-slate-300">
-                        <Mail className="w-3 h-3" />
-                        {lead.email}
-                      </div>
-                      {lead.phone && (
-                        <div className="flex items-center gap-2 text-sm text-slate-400">
-                          <Phone className="w-3 h-3" />
-                          {lead.phone}
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border ${sourceColors[lead.source]}`}>
-                      {sourceIcons[lead.source]}
-                      {lead.source.charAt(0).toUpperCase() + lead.source.slice(1)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${statusConfig[lead.status].color}`}>
-                      {statusConfig[lead.status].icon}
-                      {statusConfig[lead.status].label}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    {lead.value && <span className="text-emerald-400 font-medium">{lead.value}</span>}
-                  </td>
-                  <td className="px-6 py-4 text-slate-400 text-sm">
-                    {new Date(lead.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
-                  </td>
-                  <td className="px-6 py-4">
-                    <button className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors">
-                      <MoreVertical className="w-4 h-4 text-slate-400" />
-                    </button>
-                  </td>
+        {/* Leads Table/Cards */}
+        <div className="bg-linear-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden">
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto ">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/5">
+                  <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">
+                    Nombre
+                  </th>
+                  <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">
+                    Contacto
+                  </th>
+                  <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">
+                    Origen
+                  </th>
+                  <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">
+                    Estado
+                  </th>
+                  <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">
+                    Valor
+                  </th>
+                  <th className="text-left px-6 py-4 text-sm font-medium text-slate-400">
+                    Fecha
+                  </th>
+                  <th className="text-left px-6 py-4 text-sm font-medium text-slate-400"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredLeads.map((lead) => (
+                  <tr
+                    key={lead.id}
+                    className="border-b border-white/5 hover:bg-slate-800/50 transition-colors"
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium">
+                          {lead.name.charAt(0)}
+                        </div>
+                        <span className="text-white font-medium">
+                          {lead.name}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2 text-sm text-slate-300">
+                          <Mail className="w-3 h-3" />
+                          {lead.email}
+                        </div>
+                        {lead.phone && (
+                          <div className="flex items-center gap-2 text-sm text-slate-400">
+                            <Phone className="w-3 h-3" />
+                            {lead.phone}
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border ${sourceColors[lead.source]}`}
+                      >
+                        {sourceIcons[lead.source]}
+                        {lead.source.charAt(0).toUpperCase() +
+                          lead.source.slice(1)}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${statusConfig[lead.status].color}`}
+                      >
+                        {statusConfig[lead.status].icon}
+                        {statusConfig[lead.status].label}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {lead.value && (
+                        <span className="text-emerald-400 font-medium">
+                          {lead.value}
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 text-slate-400 text-sm">
+                      {new Date(lead.date).toLocaleDateString("es-ES", {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                    </td>
+                    <td className="px-6 py-4">
+                      <button className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors">
+                        <MoreVertical className="w-4 h-4 text-slate-400" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-
-
       </div>
     </main>
   );
