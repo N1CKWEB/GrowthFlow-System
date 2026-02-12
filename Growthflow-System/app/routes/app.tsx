@@ -5,8 +5,9 @@ import Automations from "~/pages/automations/automations";
 import Dashboard from "~/pages/home/home";
 import Leads from "~/pages/leads/leads";
 import Settings from "~/pages/settings/settings";
+// import { SesionProvider } from "next-auth/react";
 
-function App() {
+function App({}) {
   return (
     <BrowserRouter>
       <Routes>
