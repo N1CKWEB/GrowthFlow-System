@@ -1,10 +1,10 @@
-import { Settings } from "lucide-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "~/layout";
 import AIAssistant from "~/pages/aiassistant/page";
 import Automations from "~/pages/automations/automations";
 import Dashboard from "~/pages/home/home";
 import Leads from "~/pages/leads/leads";
+import Settings from "~/pages/settings/settings";
 
 function App() {
   return (
