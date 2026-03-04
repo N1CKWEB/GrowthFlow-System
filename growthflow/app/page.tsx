@@ -23,16 +23,22 @@ import {
   Zap,
 } from "lucide-react";
 import Image from "next/image";
+
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-
+  const router = useRouter();
   const { scrollY } = useScroll();
   // Hero image parallax effect - moves slightly slower than scroll, but stays fully visible
   const heroY = useTransform(scrollY, [0, 500], [0, 100]);
   const heroScale = useTransform(scrollY, [0, 500], [1, 1.05]);
+
+  const handleLogin = () => {
+    router.push("/pages/login");
+  };
 
   // Scroll Spy Logic
   useEffect(() => {
@@ -139,6 +145,7 @@ export default function App() {
             <button
               // onClick={onLogin}
               className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+              onClick={handleLogin}
             >
               Iniciar Sesión
             </button>
