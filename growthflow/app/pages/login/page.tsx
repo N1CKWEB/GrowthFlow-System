@@ -5,10 +5,17 @@ import { useState } from "react";
 import Image from "next/image";
 import img_illustration from "../../../assets/illustrations/img_illustration.svg";
 import logo_google from "../../../assets/illustrations/google.png";
+import { useRouter } from "next/navigation";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter();
+
+  const handleRegister = () => {
+    router.push("/pages/register");
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-r bg-[#0a1628] dark relative overflow-hidden px-4">
       <div className="w-full max-w-6xl bg-blue-900 rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden">
@@ -20,10 +27,13 @@ export default function Login() {
             <div className="h-8 w-32 bg-transparent" />
           </div>
 
-          <h2 className="text-3xl font-bold text-white mb-3">Log in.</h2>
+          <h2 className="text-3xl font-bold text-white mb-3">
+            Accede a tu panel{" "}
+          </h2>
 
           <p className="text-white mb-8">
-            Inicia sesión con los datos que ingresaste durante tu registro
+            Gestiona tus leads, automatiza procesos y escala tu crecimiento
+            desde un solo lugar.{" "}
           </p>
 
           {/* Email */}
@@ -58,13 +68,17 @@ export default function Login() {
           {/* Google button */}
           <button className="w-full  bg-black text-white  py-3 rounded-full font-medium flex items-center justify-center gap-2 transition cursor-pointer ">
             <Image src={logo_google} width={20} height={30} alt="" />
-            Iniciar con Google
+            Continuar con Google
           </button>
 
           <p className="text-sm text-gray-400 font-medium  text-center mt-6">
-            ¿No tienes cuenta todavía?{" "}
-            <a href="#" className="text-white font-medium hover:underline">
-              Regístrate
+            ¿Nuevo en GrowthFlow?{" "}
+            <a
+              onClick={handleRegister}
+              href="#"
+              className="text-white font-medium hover:underline"
+            >
+              Crear Cuenta
             </a>
           </p>
         </div>
