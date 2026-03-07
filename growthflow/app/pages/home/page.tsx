@@ -5,6 +5,16 @@ import { motion } from "framer-motion";
 import { Bell, ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import MetricsCard from "./components/MetricsCard";
+import {
+  Users,
+  DollarSign,
+  TrendingUp,
+  Target,
+  ArrowUpRight,
+  ArrowDownRight,
+} from "lucide-react";
+import { title } from "process";
 
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
@@ -90,6 +100,39 @@ export default function Home() {
             </div>
             <ChevronDown className="w-4 h-4 text-slate-400 hidden xl:block relative z-10" />
           </motion.button>
+        </div>
+        <div className="grid grid-cols-4">
+          <MetricsCard
+            icon={Users}
+            number="1.420"
+            porcentaje="12%"
+            title="Total Leads"
+            text="+12% from yesterday"
+          />
+
+          <MetricsCard
+            icon={Users}
+            number="320"
+            porcentaje="8%"
+            title="Conversiones"
+            text="+8% from yesterday"
+          />
+
+          <MetricsCard
+            icon={Users}
+            number="324.200"
+            porcentaje="15%"
+            title="Total Ingresos"
+            text="+15% from yesterday"
+          />
+
+          <MetricsCard
+            icon={Users}
+            number="1.420"
+            porcentaje="5%"
+            title="Total Leads"
+            text="+12% from yesterday"
+          />
         </div>
       </motion.div>
     </div>
