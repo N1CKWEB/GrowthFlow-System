@@ -10,9 +10,17 @@ interface Cards {
   number: string;
   text: string;
   porcentaje: string;
+  iconBng: string;
 }
 
-function MetricsCard({ icon: Icon, title, number, text, porcentaje }: Cards) {
+function MetricsCard({
+  icon: Icon,
+  title,
+  number,
+  text,
+  porcentaje,
+  iconBng,
+}: Cards) {
   return (
     <div className="relative w-65 h-55 rounded-3xl bg-linear-to-br from-blue-950 to-blue-950/5 p-6 flex flex-col justify-center ml-10 mt-10">
       {/* Porcentaje arriba derecha */}
@@ -21,7 +29,9 @@ function MetricsCard({ icon: Icon, title, number, text, porcentaje }: Cards) {
       </div>
 
       {/* Icono */}
-      <div className="w-14 h-14 rounded-full bg-emerald-500 flex items-center justify-center mb-6">
+      <div
+        className={`w-14 h-14 rounded-full  ${iconBng} flex items-center justify-center mb-6`}
+      >
         <Icon className="w-6 h-6 text-white" />
       </div>
 
