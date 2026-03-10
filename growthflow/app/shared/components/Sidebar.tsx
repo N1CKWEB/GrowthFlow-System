@@ -18,28 +18,28 @@ import {
 
 const menuItems = [
   {
-    href: "/dashboard",
+    href: "/pages/home",
     label: "Dashboard",
     icon: LayoutDashboard,
   },
   {
-    href: "/leads",
+    href: "/pages/leads",
     label: "Leads",
     icon: Users,
   },
   {
-    href: "/automations",
+    href: "/pages/automations",
     label: "Automatizaciones",
     icon: Zap,
   },
   {
-    href: "/assistant",
+    href: "/pages/assistant",
     label: "AI Assistant",
     icon: Bot,
     badge: "BETA",
   },
   {
-    href: "/settings",
+    href: "/pages/settings",
     label: "Configuración",
     icon: Settings,
   },
@@ -53,7 +53,7 @@ export default function Sidebar() {
     <motion.div
       animate={{ width: collapsed ? 80 : 256 }}
       transition={{ duration: 0.3 }}
-      className="bg-gradient-to-b from-slate-900/95 to-slate-950/95 border-r border-white/5 flex flex-col relative"
+      className="bg-linear-to-b from-slate-900/95 to-slate-950/95 border-r border-white/5 flex flex-col relative"
     >
       {/* Logo */}
       <div className="p-6 border-b border-white/5">
