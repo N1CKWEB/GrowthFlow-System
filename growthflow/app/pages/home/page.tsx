@@ -4,6 +4,7 @@ import Sidebar from "@/app/shared/components/Sidebar";
 import { motion } from "framer-motion";
 import { Bell, ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
+
 import MetricsCard from "./components/MetricsCard";
 import {
   TrendingUp,
@@ -23,17 +24,10 @@ import {
   AlertCircle,
   ArrowRight,
 } from "lucide-react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { title } from "process";
-import { AnimatedNumber } from "@/app/shared/components/AnimatedCounter";
+
+import ReportLeads from "./components/ReportLeads";
+import PerfomanceConvertion from "./components/PerfomanceConvertion";
+import WebhookActiveCard from "./components/ActiveWebhook";
 
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
@@ -41,7 +35,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div className="min-h-screen w-full flex bg-gradient-to-b from-slate-900 to-slate-950 overflow-hidden">
+    <div className="min-h-screen w-full flex bg-linear-to-b from-slate-900 to-slate-950 overflow-hidden">
       {/* Sidebar */}
       <Sidebar />
 
@@ -53,10 +47,10 @@ export default function Home() {
         transition={{ duration: 0.4 }}
       >
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-br from-blue-600/5 via-transparent to-purple-600/5 pointer-events-none" />
 
         {/* Top Bar */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#100e1d] relative z-10">
+        <div className="flex items-center justify-between px-6 py-3 bg-[#100e1d] relative z-10 ">
           {/* Title */}
           <div>
             <h1 className="text-2xl font-semibold">Dashboard</h1>
@@ -113,7 +107,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-sm font-semibold">
+              <div className="w-9 h-9 rounded-xl bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center text-sm font-semibold">
                 MG
               </div>
 
@@ -167,43 +161,17 @@ export default function Home() {
               iconBng="bg-orange-500"
             />
           </div>
-
-          {/* Leads Report */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5 rounded-3xl p-6 backdrop-blur-xl"
-          >
-            <h3 className="text-xl font-semibold mb-1">Reporte de Leads</h3>
-
-            <p className="text-sm text-slate-400 mb-6">
-              Últimos 7 días · clasificación por estado
-            </p>
-
-            <div className="grid grid-cols-3 gap-6">
-              <div>
-                <p className="text-3xl font-semibold">
-                  <AnimatedNumber value="980" />
-                </p>
-                <p className="text-xs text-emerald-400 mt-1">▲ 8% Nuevos</p>
-              </div>
-
-              <div>
-                <p className="text-3xl font-semibold">
-                  <AnimatedNumber value="310" />
-                </p>
-                <p className="text-xs text-slate-400 mt-1">En seguimiento</p>
-              </div>
-
-              <div>
-                <p className="text-3xl font-semibold">
-                  <AnimatedNumber value="30" />
-                </p>
-                <p className="text-xs text-red-400 mt-1">▼ 2% Perdidos</p>
-              </div>
-            </div>
-          </motion.div>
+          <div className="grid grid-cols-3">
+            <ReportLeads />
+            <PerfomanceConvertion
+              icon={ArrowUpRight}
+              subtitle="Perfomance del mes"
+              text="+5 vs last month"
+              text_recharts="1.320 leads convertidos en 320 clientes este mes"
+              title="Tasa de conversión"
+            />
+            <WebhookActiveCard />
+          </div>
         </div>
       </motion.div>
     </div>
