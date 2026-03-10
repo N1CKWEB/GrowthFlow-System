@@ -16,3 +16,8 @@ export interface Convertion {
   text: string;
   text_recharts: string;
 }
+
+export interface Webhook {
+  title: string;
+  text: string;
+}
