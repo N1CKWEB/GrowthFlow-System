@@ -3,15 +3,7 @@
 import { LucideIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-
-interface Cards {
-  icon: LucideIcon;
-  title: string;
-  number: string;
-  text: string;
-  porcentaje: string;
-  iconBng: string;
-}
+import { Cards } from "../interfaces/home.interfaces";
 
 function MetricsCard({
   icon: Icon,

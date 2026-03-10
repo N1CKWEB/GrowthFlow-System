@@ -4,6 +4,7 @@ import Sidebar from "@/app/shared/components/Sidebar";
 import { motion } from "framer-motion";
 import { Bell, ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
+
 import MetricsCard from "./components/MetricsCard";
 import {
   TrendingUp,
@@ -23,21 +24,11 @@ import {
   AlertCircle,
   ArrowRight,
 } from "lucide-react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { title } from "process";
-import { AnimatedNumber } from "@/app/shared/components/AnimatedCounter";
-import { attendanceData } from "./mocks/home.mocks";
+
 import ReportLeads from "./components/ReportLeads";
 import PerfomanceConvertion from "./components/PerfomanceConvertion";
-import { user } from "@heroui/react";
+import WebhookActiveCard from "./components/ActiveWebhook";
+
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
@@ -173,12 +164,13 @@ export default function Home() {
           <div className="grid grid-cols-3">
             <ReportLeads />
             <PerfomanceConvertion
-              icon={Users}
-              subtitle=""
-              text=""
-              text_recharts=""
-              title=""
+              icon={ArrowUpRight}
+              subtitle="Perfomance del mes"
+              text="+5 vs last month"
+              text_recharts="1.320 leads convertidos en 320 clientes este mes"
+              title="Tasa de conversión"
             />
+            <WebhookActiveCard />
           </div>
         </div>
       </motion.div>
