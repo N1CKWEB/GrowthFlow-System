@@ -28,6 +28,8 @@ import {
 import ReportLeads from "./components/ReportLeads";
 import PerfomanceConvertion from "./components/PerfomanceConvertion";
 import WebhookActiveCard from "./components/ActiveWebhook";
+import { AnimatedNumber } from "@/app/shared/components/AnimatedCounter";
+import { automationTasks } from "./mocks/home.mocks";
 
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
@@ -124,7 +126,7 @@ export default function Home() {
         {/* Dashboard Content */}
         <div className="p-6 space-y-6 relative z-10">
           {/* Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 ">
             <MetricsCard
               icon={Users}
               number="1.420"
@@ -161,7 +163,7 @@ export default function Home() {
               iconBng="bg-orange-500"
             />
           </div>
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:gap-90 space-y-6  ">
             <ReportLeads />
             <PerfomanceConvertion
               icon={ArrowUpRight}
@@ -170,7 +172,154 @@ export default function Home() {
               text_recharts="1.320 leads convertidos en 320 clientes este mes"
               title="Tasa de conversión"
             />
-            <WebhookActiveCard />
+            <WebhookActiveCard title="Activas" text="8 online" />
+          </div>
+
+          <div className="bg-linear-to-br from-blue-950 to-blue-950/5 backdrop-blur-xl border border-white/5 rounded-3xl p-6 relative overflow-hidden group">
+            {/* Animated gradient background */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5"
+              animate={{
+                x: ["-100%", "100%"],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+
+            <div className="flex items-center justify-between mb-6 relative z-10">
+              <div>
+                <h3 className="text-xl font-semibold text-white mb-1">
+                  Resumen de automatizaciones
+                </h3>
+                <p className="text-sm text-slate-400">Proyectos activos</p>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.1, rotate: 45 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2 rounded-xl bg-slate-800/50 border border-white/5 hover:bg-slate-700/50 transition-colors"
+              >
+                <ArrowUpRight className="w-4 h-4 text-slate-400" />
+              </motion.button>
+            </div>
+
+            {/* Automation Task List */}
+            <div className="space-y-4 relative z-10">
+              {automationTasks.map((task, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.3 + index * 0.1 }}
+                  whileHover={{ scale: 1.01, x: 5 }}
+                  className="p-4 rounded-2xl bg-slate-800/50 border border-white/5 hover:border-blue-500/20 transition-all cursor-pointer"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Clock className="w-4 h-4 text-blue-400" />
+                        <p className="text-sm font-medium text-white">
+                          {task.name}
+                        </p>
+                      </div>
+                      <p className="text-xs text-slate-400">{task.status}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="flex -space-x-2">
+                        {task.team.map((avatar, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{
+                              delay: 1.4 + index * 0.1 + i * 0.05,
+                            }}
+                            whileHover={{
+                              scale: 1.2,
+                              zIndex: 10,
+                            }}
+                            className="w-6 h-6 rounded-full bg-slate-700 border-2 border-slate-800 flex items-center justify-center text-xs"
+                          >
+                            {avatar}
+                          </motion.div>
+                        ))}
+                      </div>
+                      <motion.span
+                        className="text-sm font-medium text-white"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5 + index * 0.1 }}
+                      >
+                        <AnimatedNumber value={`${task.progress}%`} />
+                      </motion.span>
+                    </div>
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="relative h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                    <motion.div
+                      className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${task.progress}%` }}
+                      transition={{
+                        duration: 1,
+                        delay: 1.5 + index * 0.1,
+                        ease: "easeOut",
+                      }}
+                    />
+                    {/* Shimmer effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      animate={{
+                        x: ["-100%", "200%"],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: 1.5 + index * 0.1,
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-6 space-y-6 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+              <div className="bg-linear-to-br from-emerald-700/15 to-emerald-400 ml-10 rounded-2xl p-6 backdrop-blur-xl w-90">
+                <div></div>
+                <h2>AI Insight</h2>
+                <p>Análisis inteligente en tiempo real</p>
+              </div>
+              <div className="bg-linear-to-br from-red-700/15 to-red-400 ml-10 rounded-2xl ">
+                <h2>Incremento en conversiones</h2>
+                <p>
+                  Tus leads de Instagram muestran un 23% más de engagement.
+                  Considera aumentar la frecuencia de DMs.
+                </p>
+                <p>+23% esta semana</p>
+              </div>
+              <div className="bg-linear-to-br from-blue-700/15 to-blue-400 ml-10 rounded-2xl ">
+                <h2>Incremento en conversiones</h2>
+                <p>
+                  Tus leads de Instagram muestran un 23% más de engagement.
+                  Considera aumentar la frecuencia de DMs.
+                </p>
+                <p>+23% esta semana</p>
+              </div>
+              <div className="bg-linear-to-br from-purple-700/15 to-purple-400 ml-10 rounded-2xl ">
+                <h2>Incremento en conversiones</h2>
+                <p>
+                  Tus leads de Instagram muestran un 23% más de engagement.
+                  Considera aumentar la frecuencia de DMs.
+                </p>
+                <p>+23% esta semana</p>
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
