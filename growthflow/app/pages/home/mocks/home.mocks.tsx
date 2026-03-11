@@ -94,3 +94,49 @@ export const activeWebhooks = [
     iconCheck: <CheckCircle2 className="w-4 h-4 text-emerald-400" />,
   },
 ];
+
+export const Insight = [
+  {
+    bgColor: <div className="" />,
+    title: "Incremento en conversiones",
+    subtitle:
+      "Tus leads de Instagram muestran un 23% más de engagement. Considera aumentar la frecuencia de DMs.",
+    text: "+23 esta semana",
+  },
+
+  {
+    bgColor: <div className="" />,
+    title: "Leads sin seguimiento",
+    subtitle:
+      "42 leads esperan respuesta hace más de 48h. Activa una secuencia automática de follow-up.",
+    text: "Ver leads →",
+  },
+
+  {
+    bgColor: <div className="" />,
+    title: "Mejor horario de contacto",
+    subtitle:
+      "La IA detectó que 18:00-20:00 es el momento con mayor tasa de respuesta (78%).",
+    text: "Aplicar en automatizaciones",
+  },
+];
+
+export const ActionSuggest = [
+  {
+    title: "Incremento en conversiones",
+    subtitle:
+      "Tus leads de Instagram muestran un 23% más de engagement. Considera aumentar la frecuencia de DMs.",
+  },
+
+  {
+    title: "Leads sin seguimiento",
+    subtitle:
+      "42 leads esperan respuesta hace más de 48h. Activa una secuencia automática de follow-up.",
+  },
+
+  {
+    title: "Mejor horario de contacto",
+    subtitle:
+      "La IA detectó que 18:00-20:00 es el momento con mayor tasa de respuesta (78%).",
+  },
+];
