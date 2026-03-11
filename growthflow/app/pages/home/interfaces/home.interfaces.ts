@@ -21,3 +21,10 @@ export interface Webhook {
   title: string;
   text: string;
 }
+
+export interface Insights {
+  title: string;
+  subtitle: string;
+  icon: LucideIcon;
+  bgColor: string;
+}
