@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Users {
+  id_users Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  role String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  leads Leads[]
+  automations Automations[]
+}
+
+model Leads {
+  id_leads Int @id @default(autoincrement())
+  user_id Int
+  user  Users    @relation(fields: [user_id], references: [id_users], onDelete: Cascade)
+  name String
+  phone String
+  source String
+  status String @default("new")
+  score Int
+  notes String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  conversations Conversations[]
+  conversions Conversions[]
+}
+
+model Conversations {
+  id_conversations Int @id @default(autoincrement())
+  lead_id Int
+  lead    Leads @relation(fields: [lead_id], references: [id_leads], onDelete: Cascade)
+  channel    String?
+  created_at DateTime @default(now())
+  messages Messages[]
+}
+
+model Conversions {
+  id_conversions Int @id @default(autoincrement())
+  lead_id Int
+  lead    Leads @relation(fields: [lead_id], references: [id_leads], onDelete: Cascade)
+  amount    Decimal  @db.Decimal(12,2)
+  currency  String   @default("USD")
+  closed_at DateTime @default(now())
+}
+
+model Messages {
+  id_messages Int @id @default(autoincrement())
+  conversation_id Int
+  conversation    Conversations @relation(fields: [conversation_id], references: [id_conversations], onDelete: Cascade)
+  sender     String
+  content    String?
+  created_at DateTime @default(now())
+}
+
+model Automations {
+  id_automations Int @id @default(autoincrement())
+  user_id Int
+  user    Users @relation(fields: [user_id], references: [id_users], onDelete: Cascade)
+  name         String
+  type         String
+  status       String @default("active")
+  trigger_type String?
+  created_at   DateTime @default(now())
+}
