@@ -1,7 +1,7 @@
 import { Webhook } from "../interfaces/home.interfaces";
 import { activeWebhooks } from "../mocks/home.mocks";
 
-const WebhookActiveCard = ({ text, title }: Webhook) => {
+const Card = ({ text, title }: Webhook) => {
   return (
     <div className="bg-linear-to-br from-blue-950 to-blue-950/5 ml-10 rounded-2xl p-6 backdrop-blur-xl w-90">
       <h2 className="text-xl font-semibold ">{title}</h2>
@@ -38,4 +38,4 @@ const WebhookActiveCard = ({ text, title }: Webhook) => {
   );
 };
 
-export default WebhookActiveCard;
+export default Card;
