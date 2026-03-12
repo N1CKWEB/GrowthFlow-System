@@ -1,4 +1,4 @@
-import { div } from "framer-motion/client";
+import { div, h3, p } from "framer-motion/client";
 import {
   TrendingUp,
   Users,
@@ -97,7 +97,8 @@ export const activeWebhooks = [
 
 export const Insight = [
   {
-    bgColor: <div className="" />,
+    bgColor: <div className="from-red-700 to-red-400" />,
+    textColor: <span className="text-emerald-400" />,
     title: "Incremento en conversiones",
     subtitle:
       "Tus leads de Instagram muestran un 23% más de engagement. Considera aumentar la frecuencia de DMs.",
@@ -105,7 +106,8 @@ export const Insight = [
   },
 
   {
-    bgColor: <div className="" />,
+    bgColor: <div className="from-orange-700 to-orange-400" />,
+    textColor: <span className="text-orange-800" />,
     title: "Leads sin seguimiento",
     subtitle:
       "42 leads esperan respuesta hace más de 48h. Activa una secuencia automática de follow-up.",
@@ -113,7 +115,8 @@ export const Insight = [
   },
 
   {
-    bgColor: <div className="" />,
+    bgColor: <div className="from-purple-700 to-purple-400" />,
+    textColor: <span className="text-purple-400" />,
     title: "Mejor horario de contacto",
     subtitle:
       "La IA detectó que 18:00-20:00 es el momento con mayor tasa de respuesta (78%).",
@@ -123,20 +126,22 @@ export const Insight = [
 
 export const ActionSuggest = [
   {
-    title: "Incremento en conversiones",
-    subtitle:
-      "Tus leads de Instagram muestran un 23% más de engagement. Considera aumentar la frecuencia de DMs.",
+    title: "Crear Secuencia de nurturing",
+    subtitle: "Para leads en fase de consideración",
   },
 
   {
-    title: "Leads sin seguimiento",
-    subtitle:
-      "42 leads esperan respuesta hace más de 48h. Activa una secuencia automática de follow-up.",
+    title: "Optimizar respuestas Instagram",
+    subtitle: "Mejora tiempo de respuesta en 40%",
   },
 
   {
-    title: "Mejor horario de contacto",
-    subtitle:
-      "La IA detectó que 18:00-20:00 es el momento con mayor tasa de respuesta (78%).",
+    title: "Analizar patrones de conversión",
+    subtitle: "Identificar oportunidades de mejora",
+  },
+
+  {
+    title: "Recuperar leads perdidos",
+    subtitle: "Campaña de reactivación automática",
   },
 ];
